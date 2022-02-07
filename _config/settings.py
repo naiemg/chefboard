@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     # custom apps
     'apps.userauth',
+
+    # third party apps
 ]
 
 MIDDLEWARE = [
@@ -83,6 +85,7 @@ DATABASES = {
     }
 }
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
