@@ -1,0 +1,105 @@
+<style>
+    :root {
+        --main-text-color: #5433FF;
+        --secondary-text-color: #393D3F;
+    }
+
+    .navbar {
+        background-color: #f4f4f4;
+        border-bottom: 1px solid var(--main-text-color);
+    }
+
+    .navbar-toggler {
+        color: var(--main-text-color);
+    }
+
+    .navbar-brand {
+        color: var(--main-text-color);
+        font-weight: normal;
+    }
+
+    .nav-link,
+    .user-btn {
+        color: var(--secondary-text-color);
+    }
+
+    .create-btn {
+        border-radius: 15px !important;
+        border: none;
+        background-color: var(--secondary-text-color);
+        color: azure;
+        margin: 5px;
+    }
+
+    .nav-link:hover,
+    .user-btn:hover,
+    .navbar-brand:hover {
+        color: var(--main-text-color);
+    }
+
+    .create-btn:hover {
+        color: white;
+        background-color: var(--main-text-color);
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+            aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="/">ChefBoard</a>
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Disabled</a>
+                </li>
+            </ul>
+
+            <div class="btn-group">
+                <span class="btn btn-sm btn-outline create-btn" data-bs-toggle="dropdown" data-bs-display="static"
+                    aria-haspopup="true" aria-expanded="false">Create
+                    <i class="fas fa-chevron-down"></i>
+                </span>
+                <div class="dropdown-menu dropdown-menu-lg-end">
+                    Create menu is in here
+                </div>
+            </div>
+
+            <a class="nav-link" href="#">
+                <i class="fas fa-bell"> </i>
+                <span class="d-block d-sm-none">Notifications</span>
+            </a>
+
+            <a class="nav-link" href="#">
+                <i class="fas fa-cog"> </i>
+                <span class="d-block d-sm-none">Settings</span>
+            </a>
+
+            <div class="btn-group">
+                <a class="btn user-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fas fa-user"> </i>
+                    <span class="d-block d-sm-none">Profile</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li>
+                        <h5 class="dropdown-header">John Doe</h5>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
