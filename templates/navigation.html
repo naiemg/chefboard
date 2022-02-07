@@ -51,18 +51,19 @@
         </button>
         <a class="navbar-brand" href="/">ChefBoard</a>
         <div class="collapse navbar-collapse" id="menu">
+
+            <!--User is logged in-->
+            {% if not user.is_authenticated %}
+
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Disabled</a>
+                    <a class="nav-link" href="/register">Register</a>
                 </li>
             </ul>
-
+            {% else %}
             <div class="btn-group">
                 <span class="btn btn-sm btn-outline create-btn" data-bs-toggle="dropdown" data-bs-display="static"
                     aria-haspopup="true" aria-expanded="false">Create
@@ -91,15 +92,17 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end">
                     <li>
-                        <h5 class="dropdown-header">John Doe</h5>
+                        <h5 class="dropdown-header">{{user.first_name}} {{user.last_name}}
+                        </h5>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                    <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
                 </ul>
             </div>
+            {% endif %}
+
         </div>
     </div>
 </nav>

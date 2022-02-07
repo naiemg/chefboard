@@ -86,5 +86,14 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/login')
 
-def test(request):
-    return render(request, 'userauth/test.html', {})
+@login_required
+def dashboard(request):
+    context_dict = {}
+
+    current_user = request.user
+    context_dict['current_user'] = current_user
+    
+    profile = UserProfile.objects.get(user=request.user)
+    context_dict['profile'] = profile
+
+    return render(request, 'userauth/dashboard.html', context_dict)

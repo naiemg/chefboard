@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.userauth',
 
     # third party apps
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -71,6 +72,8 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 WSGI_APPLICATION = '_config.wsgi.application'
 

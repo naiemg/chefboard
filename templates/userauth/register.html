@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+<style>
+    :root {
+        --main-text-color: #5433FF;
+        --secondary-text-color: #393D3F;
+    }
+
+    .submit-button {
+        background-color: var(--main-text-color);
+    }
+
+    .submit-button:hover {
+        background-color: var(--secondary-text-color);
+    }
+</style>
+
+
+
+{% if invalid %}
+<div class="alert alert-warning m-2 text-center" role="alert">
+    The username and/or password is incorrect.
+</div>
+{% endif %}
+<div class="container">
+    <div class="row">
+        <!--Information about Website-->
+        <div class="col-md-6 pt-1 text-center m-auto">
+            <div class="pt-3 register-prompt">
+                <p>
+                    Have an account? <a style="text-decoration: none;" href="/login/">Sign In</a>
+                </p>
+            </div>
+        </div>
+
+        <!--Registration Form-->
+        <div class="col-md-6 m-auto pt-4">
+            {% if invalid %}
+            <div class="alert alert-danger" role="alert">
+                The username and/or password is incorrect.
+            </div>
+            {% endif %}
+            <form class="register-form" id="login_form" method="post" action="" autocomplete="off">
+                {% csrf_token %}
+                {{user_form|crispy}}
+                {{user_profile_form|crispy}}
+                <button type="submit" class="btn btn-block btn-success mt-2 submit-button">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

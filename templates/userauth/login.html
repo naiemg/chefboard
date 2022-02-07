@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block body %}
+
+
+<style>
+    :root {
+        --main-text-color: #5433FF;
+        --secondary-text-color: #393D3F;
+    }
+
+    .login-button {
+        background-color: var(--main-text-color);
+    }
+
+    .login-button:hover {
+        background-color: var(--secondary-text-color);
+    }
+</style>
+
+{% if invalid %}
+<div class="alert alert-warning m-2 text-center" role="alert">
+    The username and/or password is incorrect.
+</div>
+{% endif %}
+
+<!--Information -->
+<div class="m-4 rounded-3 text-center bg-light">
+    <div class="container-fluid py-5">
+        <h1>Login</h1>
+        <div class="col-md-4 pt-3 m-auto">
+            <form id="login_form" method="post" action="">
+                <div class="form-group form-signin">
+                    {% csrf_token %}
+                    <input type="text" class="form-control mb-2" name="username" value="" placeholder="Username"
+                        autofocus />
+                    <input type="password" class="form-control" name="password" value="" placeholder="Password">
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block font-weight-bold p-10 login-button">Log
+                        In</button>
+                </div>
+            </form>
+        </div>
+        <div class="pt-3 register-prompt">
+            <p>
+                Don't have an account? <a style="text-decoration: none;" href="/register/">Sign Up</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
