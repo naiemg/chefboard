@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,5 +142,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),] # new
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-GOOGLE_API_KEY = 'AIzaSyDv9KSYbZUECt9BGnxtsJQYhWaDvmtbhtY'
+GOOGLE_API_KEY = os.environ.get("google_api_key")
 PHONENUMBER_DEFAULT_REGION = 'US'
