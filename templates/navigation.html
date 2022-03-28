@@ -53,8 +53,52 @@
         <div class="collapse navbar-collapse" id="menu">
 
             <!--User is logged in-->
-            {% if not user.is_authenticated %}
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+                <li class="nav-item">
+                </li>
+            </ul>
 
+            <div class="d-flex">
+                <div class="btn-group">
+                    <span class="btn btn-sm btn-outline create-btn" data-bs-toggle="dropdown" data-bs-display="static"
+                        aria-haspopup="true" aria-expanded="false">Create
+                        <i class="fas fa-chevron-down"></i>
+                    </span>
+                    <div class="dropdown-menu dropdown-menu-lg-end">
+                        Create menu is in here
+                    </div>
+                </div>
+
+                <a class="nav-link" href="#">
+                    <i class="fas fa-bell"> </i>
+                    <span class="d-block d-sm-none">Notifications</span>
+                </a>
+
+                <a class="nav-link" href="#">
+                    <i class="fas fa-cog"> </i>
+                    <span class="d-block d-sm-none">Settings</span>
+                </a>
+
+                <div class="btn-group">
+                    <a class="btn user-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fas fa-user"> </i>
+                        <span class="d-block d-sm-none">Profile</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg-end">
+                        <li>
+                            <h5 class="dropdown-header">{{user.first_name}} {{user.last_name}}
+                            </h5>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+            {% else %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="/login">Login</a>
@@ -63,44 +107,6 @@
                     <a class="nav-link" href="/register">Register</a>
                 </li>
             </ul>
-            {% else %}
-            <div class="btn-group">
-                <span class="btn btn-sm btn-outline create-btn" data-bs-toggle="dropdown" data-bs-display="static"
-                    aria-haspopup="true" aria-expanded="false">Create
-                    <i class="fas fa-chevron-down"></i>
-                </span>
-                <div class="dropdown-menu dropdown-menu-lg-end">
-                    Create menu is in here
-                </div>
-            </div>
-
-            <a class="nav-link" href="#">
-                <i class="fas fa-bell"> </i>
-                <span class="d-block d-sm-none">Notifications</span>
-            </a>
-
-            <a class="nav-link" href="#">
-                <i class="fas fa-cog"> </i>
-                <span class="d-block d-sm-none">Settings</span>
-            </a>
-
-            <div class="btn-group">
-                <a class="btn user-btn" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true"
-                    aria-expanded="false">
-                    <i class="fas fa-user"> </i>
-                    <span class="d-block d-sm-none">Profile</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-lg-end">
-                    <li>
-                        <h5 class="dropdown-header">{{user.first_name}} {{user.last_name}}
-                        </h5>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="/logout">Sign Out</a></li>
-                </ul>
-            </div>
             {% endif %}
 
         </div>
