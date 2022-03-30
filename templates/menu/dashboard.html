@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h3>Your Restaurants</h3>
+    Token: {{auth_token}}
+
+    <ol class="list-group list-group-numbered">
+        {% for r in rest_owned %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">{{r.name}}</div>
+                <div class="text-muted">{{r.address1}} | {{r.phone_number}}</div>
+            </div>
+        </li>
+        {% endfor %}
+
+        {% if rest_owned is empty %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">No restaurants</div>
+            </div>
+        </li>
+        {% endif %}
+    </ol>
+</div>
+{% endblock %}

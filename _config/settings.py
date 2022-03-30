@@ -44,12 +44,17 @@ INSTALLED_APPS = [
     # custom apps
     'apps.userauth',
     'apps.menu',
+    'apps.api',
 
     # third party apps
     "crispy_forms",
     "address",
     "phonenumber_field",
-    "phonenumbers"
+    "phonenumbers",
+    "rest_framework",
+    "rest_framework.authtoken",
+    'django_filters',
+    "corsheaders",
 
 ]
 
@@ -58,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -144,3 +150,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GOOGLE_API_KEY = os.environ.get("google_api_key")
 PHONENUMBER_DEFAULT_REGION = 'US'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+CORS_ORIGIN_ALLOW_ALL=True
+
+LOGIN_REDIRECT_URL = "/dashboard/"
