@@ -10,7 +10,7 @@ Categories | {{rest_owned.name}}
 {% block body %}
 <div class="container">
     <h3>Categories
-        <a class="btn btn-primary" href="{% url 'restaurant_create' %}">New</a>
+        <a class="btn btn-primary" href="{% url 'category_create' rest_owned.id %}">New</a>
     </h3>
     <h5 class="text-muted">{{rest_owned.name}}</h5>
 
@@ -20,6 +20,7 @@ Categories | {{rest_owned.name}}
             <div class="ms-2 me-auto">
                 <div class="fw-bold">{{c.name}}</div>
             </div>
+            <a class="" href="{% url 'category_update' rest_owned.id c.id %}">Edit</a>
         </li>
         {% endfor %}
 

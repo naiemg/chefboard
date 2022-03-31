@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from apps.userauth.models import UserProfile
 from .models import Category, Restaurant
 from rest_framework.authtoken.models import Token
-from .forms import RestaurantForm
+from .forms import RestaurantForm, CategoryForm
 from address.models import Address
 
 @login_required
@@ -93,3 +93,46 @@ def restaurant_update(request, rest_id):
     }
 
     return render(request, 'menu/restaurant_update.html', context_dict)
+
+def category_create(request, rest_id):
+    context_dict = {}
+
+    restaurant = get_object_or_404(Restaurant, id=rest_id)
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.restaurant = restaurant
+            post.save()
+            return redirect('restaurant_read_categories', rest_id=rest_id)
+    else:
+        form = CategoryForm()
+
+    context_dict = {
+        "form": form,
+        "restaurant": restaurant,
+    }
+
+    return render(request, 'menu/category_create.html', context_dict)
+
+def category_update(request, rest_id, cat_id):
+    context_dict = {}
+
+    restaurant = get_object_or_404(Restaurant, id=rest_id)
+    category = get_object_or_404(Category, id=cat_id)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.restaurant = restaurant
+            post.save()
+            return redirect('restaurant_read_categories', rest_id=rest_id)
+    else:
+        form = CategoryForm(instance=category)
+
+    context_dict = {
+        "form": form,
+        "restaurant": restaurant,
+    }
+
+    return render(request, 'menu/category_update.html', context_dict)
