@@ -4,12 +4,13 @@
 {% endblock %}
 
 {% block title %}
+{{category.name}} | {{restaurant.name}}
 {% endblock %}
 
 {% block body %}
 <div class="container">
-    <h5>{{restaurant.name}}, id = {{restaurant.id}}</h5>
-    <h5>{{category.name}}, id = {{category.id}}</h5>
+    <h6>Restaurant: <i>{{restaurant.name}}</i> (id = {{restaurant.id}})</h6>
+    <h6>Category: <i>{{category.name}}</i> (id = {{category.id}})</h6>
 
     <!-- PLACEHOLDER: DELETE THIS WHEN YOU BRING IN THE REACT COMPONENT -->
     <div class="text-center p-4 m-4" style="background-color: antiquewhite; border: 3px gray solid;">
