@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}
+{{current_user.first_name}} {{current_user.last_name}}
+{% endblock %}
+
+{% block body %}
+<h1>Profile: {{current_user.first_name}} {{current_user.last_name}}</h1>
+<div class="container mt-5">
+    {% if subscription.status == "active" %}
+    <h4>Your subscription:</h4>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">
+                {{ product.description }}
+            </p>
+            <h6>Renews: {{subscription.current_period_end}}</h6>
+        </div>
+    </div>
+    {% else %}
+    <h4>Status: Unsubscribed</h4>
+    <button type="submit" class="btn btn-primary" id="submitBtn">Subscribe for $5/month</button>
+    {% endif %}
+</div>
+
+{% endblock %}

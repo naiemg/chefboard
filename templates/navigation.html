@@ -88,8 +88,10 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg-end">
                         <li>
-                            <h5 class="dropdown-header">{{user.first_name}} {{user.last_name}}
-                            </h5>
+                            <a class="dropdown-header" href="{% url 'profile' %}">
+                                {{user.first_name}}
+                                {{user.last_name}}
+                            </a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">

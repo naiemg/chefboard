@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Cancel
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <p>You have cancelled the checkout.</p>
+    <p><a href="{% url 'profile' %}">Return to profile</a></p>
+</div>
+{% endblock %}
