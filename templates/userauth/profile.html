@@ -20,8 +20,10 @@
             <p class="card-text">
                 {{ product.description }}
             </p>
-            <h6>Renews: {{subscription.current_period_end|print_timestamp }}</h6>
-            <h6>Amount Charged: ${{subscription.items.data.0.price.unit_amount|print_dollar_amount }}</h6>
+            <hr>
+            Next Payment: <span class="text-muted">{{subscription.current_period_end|print_timestamp }}</span>
+            Amount Charged:<span class="text-muted">
+                ${{subscription.items.data.0.price.unit_amount|print_dollar_amount}}</span>
         </div>
     </div>
     {% else %}
