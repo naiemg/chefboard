@@ -6,6 +6,7 @@ from .models import Category, Restaurant
 from rest_framework.authtoken.models import Token
 from .forms import RestaurantForm, CategoryForm
 from address.models import Address
+from apps.menu.decorators import user_is_owner
 
 @login_required
 def dashboard(request):
@@ -21,6 +22,7 @@ def dashboard(request):
 
     return render(request, 'menu/dashboard.html', context_dict)
 
+@login_required
 def restaurant_create(request):
     context_dict = {}
 
@@ -53,6 +55,7 @@ def restaurant_create(request):
     return render(request, 'menu/restaurant_create.html', context_dict)
 
 @login_required
+@user_is_owner
 def restaurant_read_categories(request, rest_id):
     context_dict = {}
     profile = UserProfile.objects.get(user=request.user)
@@ -66,6 +69,8 @@ def restaurant_read_categories(request, rest_id):
 
     return render(request, 'menu/restaurant_read_categories.html', context_dict)
 
+@login_required
+@user_is_owner
 def restaurant_update(request, rest_id):
     context_dict = {}
 
@@ -94,11 +99,15 @@ def restaurant_update(request, rest_id):
 
     return render(request, 'menu/restaurant_update.html', context_dict)
 
+@login_required
+@user_is_owner
 def restaurant_delete(request, rest_id):
     restaurant = get_object_or_404(Restaurant, id=rest_id)
     restaurant.delete()
     return redirect('dashboard')
 
+@login_required
+@user_is_owner
 def category_create(request, rest_id):
     context_dict = {}
 
@@ -120,6 +129,8 @@ def category_create(request, rest_id):
 
     return render(request, 'menu/category_create.html', context_dict)
 
+@login_required
+@user_is_owner
 def category_read(request, rest_id, cat_id):
     context_dict = {}
 
@@ -129,6 +140,8 @@ def category_read(request, rest_id, cat_id):
     context_dict['category'] = category
     return render(request, 'menu/category_read.html', context_dict)
 
+@login_required
+@user_is_owner
 def category_update(request, rest_id, cat_id):
     context_dict = {}
 

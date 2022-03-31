@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}
+403
+{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+        background-color: antiquewhite;
+    }
+
+    img {
+        border: 5px solid black;
+        border-radius: 10%;
+        box-shadow: 0 0 10px black;
+        margin-top: 40px;
+    }
+
+    img:hover {
+        box-shadow: 0 0 20px black;
+        transform: scale(1.1);
+        transition: 0.5s;
+    }
+</style>
+
+<div class="text-center">
+    <h1>Error Code: 403</h1>
+    <h2><i>Forbidden</i></h2>
+    <img src="https://media1.giphy.com/media/8U8LDibipKRDq/giphy.webp?cid=dda24d50lpv2w1cl6poecg0yl0vge3pradbx0uyzp213g1im&rid=giphy.webp&ct=g"
+        alt="">
+</div>
+{% endblock %}
