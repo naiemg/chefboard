@@ -94,6 +94,11 @@ def restaurant_update(request, rest_id):
 
     return render(request, 'menu/restaurant_update.html', context_dict)
 
+def restaurant_delete(request, rest_id):
+    restaurant = get_object_or_404(Restaurant, id=rest_id)
+    restaurant.delete()
+    return redirect('dashboard')
+
 def category_create(request, rest_id):
     context_dict = {}
 

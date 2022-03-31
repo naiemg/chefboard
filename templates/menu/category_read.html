@@ -8,8 +8,12 @@
 
 {% block body %}
 <div class="container">
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum veniam vero eveniet necessitatibus vel distinctio
-    iusto similique. Perferendis ipsum id blanditiis laborum porro, inventore quos corrupti hic! Iste, dignissimos
-    culpa.
+    <h5>{{restaurant.name}}, id = {{restaurant.id}}</h5>
+    <h5>{{category.name}}, id = {{category.id}}</h5>
+
+    <!-- PLACEHOLDER: DELETE THIS WHEN YOU BRING IN THE REACT COMPONENT -->
+    <div class="text-center p-4 m-4" style="background-color: antiquewhite; border: 3px gray solid;">
+        <h1>React Table Goes <br> here with all of the <br> menu_items for that given category</h1>
+    </div>
 </div>
 {% endblock %}
