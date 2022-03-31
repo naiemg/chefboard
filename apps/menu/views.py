@@ -115,6 +115,15 @@ def category_create(request, rest_id):
 
     return render(request, 'menu/category_create.html', context_dict)
 
+def category_read(request, rest_id, cat_id):
+    context_dict = {}
+
+    restaurant = get_object_or_404(Restaurant, id=rest_id)
+    category = get_object_or_404(Category, id=cat_id)
+    context_dict['restaurant'] = restaurant
+    context_dict['category'] = category
+    return render(request, 'menu/category_read.html', context_dict)
+
 def category_update(request, rest_id, cat_id):
     context_dict = {}
 

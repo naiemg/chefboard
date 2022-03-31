@@ -18,7 +18,8 @@ Categories | {{rest_owned.name}}
         {% for c in categories %}
         <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">{{c.name}}</div>
+                <div class="fw-bold"><a href="{% url 'category_read' rest_owned.id c.id %}">{{c.name}}</a>
+                </div>
             </div>
             <a class="" href="{% url 'category_update' rest_owned.id c.id %}">Edit</a>
         </li>
