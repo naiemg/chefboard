@@ -21,21 +21,7 @@ def dashboard(request):
 
     return render(request, 'menu/dashboard.html', context_dict)
 
-@login_required
-def read_category(request, rest_id):
-    context_dict = {}
-    profile = UserProfile.objects.get(user=request.user)
-    context_dict['profile'] = profile
-
-    rest_owned = Restaurant.objects.get(id = rest_id)
-    context_dict['rest_owned'] = rest_owned
-
-    categories = Category.objects.filter(restaurant=rest_id)
-    context_dict['categories'] = categories
-
-    return render(request, 'menu/read_category.html', context_dict)
-
-def create_restaurant(request):
+def restaurant_create(request):
     context_dict = {}
 
     addresses = Address.objects.all()
@@ -64,9 +50,23 @@ def create_restaurant(request):
         "addresses": addresses,
     }
 
-    return render(request, 'menu/create_restaurant.html', context_dict)
+    return render(request, 'menu/restaurant_create.html', context_dict)
 
-def edit_restaurant(request, rest_id):
+@login_required
+def restaurant_read_categories(request, rest_id):
+    context_dict = {}
+    profile = UserProfile.objects.get(user=request.user)
+    context_dict['profile'] = profile
+
+    rest_owned = Restaurant.objects.get(id = rest_id)
+    context_dict['rest_owned'] = rest_owned
+
+    categories = Category.objects.filter(restaurant=rest_id)
+    context_dict['categories'] = categories
+
+    return render(request, 'menu/restaurant_read_categories.html', context_dict)
+
+def restaurant_update(request, rest_id):
     context_dict = {}
 
     addresses = Address.objects.all()
@@ -74,7 +74,6 @@ def edit_restaurant(request, rest_id):
         google_api_key_set = True
     else:
         google_api_key_set = False
-
 
     restaurant = get_object_or_404(Restaurant, id=rest_id)
     if request.method == "POST":
@@ -93,4 +92,4 @@ def edit_restaurant(request, rest_id):
         "addresses": addresses,
     }
 
-    return render(request, 'menu/edit_restaurant.html', context_dict)
+    return render(request, 'menu/restaurant_update.html', context_dict)

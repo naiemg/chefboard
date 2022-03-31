@@ -3,8 +3,8 @@ from apps.menu import views
 
 urlpatterns = [
 	path('dashboard/', views.dashboard, name="dashboard"),
-	path('category/<int:rest_id>/', views.read_category, name="read_category"),
-	path('restaurant/create/', views.create_restaurant, name="create_restaurant"),
-	path('restaurant/<int:rest_id>/edit/', views.edit_restaurant, name="edit_restaurant"),
-
+	
+	path('restaurant/create/', views.restaurant_create, name="restaurant_create"),
+	path('restaurant/<int:rest_id>/category/', views.restaurant_read_categories, name="restaurant_read_categories"),
+	path('restaurant/<int:rest_id>/update/', views.restaurant_update, name="restaurant_update"),
 ]

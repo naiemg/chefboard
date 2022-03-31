@@ -9,7 +9,9 @@ Categories | {{rest_owned.name}}
 
 {% block body %}
 <div class="container">
-    <h3>Categories</h3>
+    <h3>Categories
+        <a class="btn btn-primary" href="{% url 'restaurant_create' %}">New</a>
+    </h3>
     <h5 class="text-muted">{{rest_owned.name}}</h5>
 
     <ol class="list-group list-group-numbered">
