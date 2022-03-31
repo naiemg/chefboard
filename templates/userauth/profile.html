@@ -10,26 +10,67 @@
 {% endblock %}
 
 {% block body %}
-<h1>Profile: {{current_user.first_name}} {{current_user.last_name}}</h1>
-<div class="container mt-5">
-    {% if subscription.status == "active" %}
-    <h4>Your subscription:</h4>
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text">
-                {{ product.description }}
-            </p>
-            <hr>
-            Next Payment: <span class="text-muted">{{subscription.current_period_end|print_timestamp }}</span>
-            Amount Charged:<span class="text-muted">
-                ${{subscription.items.data.0.price.unit_amount|print_dollar_amount}}</span>
+<div class="container account-info">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="p-3 my-3 rounded-3 dashboard-header">
+                <h3>Account Settings</h3>
+            </div>
+            <div class="container">
+                <h4>First Name</h4>
+                <p>{{current_user.first_name}}</p>
+                <h4>Last Name</h4>
+                <p>{{current_user.last_name}}</p>
+                <h4>Username</h4>
+                <p>{{current_user.username}}</p>
+                <h4>Email</h4>
+                <p>{{current_user.email}}</p>
+                <h4>Auth Token</h4>
+                <p><code>{{auth_token}}</code></p>
+                <h4>Account Created</h4>
+                <p>{{current_user.date_joined}} <br> ({{current_user.date_joined|timesince}} ago)</p>
+                <h4>Last Login</h4>
+                <p>{{current_user.last_login}} <br> ({{current_user.last_login|timesince}} ago)</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="p-3 my-3 rounded-3 dashboard-header">
+                <h3>Payment & Subscriptions</h3>
+            </div>
+            <div class="container">
+                {% if subscription.status == "active" %}
+                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Paid on {{subscription.current_period_start|print_timestamp}}
+                        <span style="float: right;" class="badge rounded-pill bg-light text-dark">
+                            ${{subscription.items.data.0.price.unit_amount|print_dollar_amount}}</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text"> {{ product.description }}</p>
+                    </div>
+                    <div class="card-footer bg-light text-dark">
+                        Next Payment: <span
+                            class="text-muted">{{subscription.current_period_end|print_timestamp}}</span>
+                        </span>
+                    </div>
+                </div>
+                {% else %}
+                <h4 class="text-secondary">Status: Unsubscribed</h4>
+                <button type="submit" class="btn btn-primary" id="submitBtn">Subscribe for $5/month</button>
+                {% endif %}
+
+                <!--Developer Note: Delete when deployed!-->
+                <div class="bg-light p-3" style="border-left: rgb(1, 93, 1) 3px solid;">
+                    <h6>Developer Note: Delete when deployed!</h6>
+                    <p>Payments not working? Run this in another terminal to start the Stripe
+                        CLI: <code>stripe listen --forward-to localhost:8000/webhook/</code>
+                        (Not required in deployed version)</p>
+                    <a href="https://testdriven.io/blog/django-stripe-subscriptions/#stripe-webhooks">More
+                        Information</a>
+                </div>
+            </div>
         </div>
     </div>
-    {% else %}
-    <h4>Status: Unsubscribed</h4>
-    <button type="submit" class="btn btn-primary" id="submitBtn">Subscribe for $5/month</button>
-    {% endif %}
 </div>
 
 {% endblock %}

@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 
 # model imports
 from apps.userauth.models import UserProfile, StripeCustomer
@@ -106,10 +107,9 @@ def dashboard(request):
 
 @login_required
 def profile(request):
-    context_dict = {}
-
     current_user = request.user
     profile = UserProfile.objects.get(user=request.user)
+    token_search = Token.objects.get_or_create(user=request.user)
 
     try:
         # Retrieve the subscription & product
@@ -127,10 +127,15 @@ def profile(request):
             'product': product,
             'current_user': current_user,
             'profile': profile,
+            'auth_token': token_search[0],
         })
 
     except StripeCustomer.DoesNotExist:
-        return render(request, 'userauth/profile.html')
+        return render(request, 'userauth/profile.html', {
+            'current_user': current_user,
+            'profile': profile,
+            'auth_token': token_search[0],
+    })
 
 @csrf_exempt
 def stripe_config(request):
