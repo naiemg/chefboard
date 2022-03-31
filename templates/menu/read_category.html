@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block title %}
+Categories | {{rest_owned.name}}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h3>Categories</h3>
+    <h5 class="text-muted">{{rest_owned.name}}</h5>
+
+    <ol class="list-group list-group-numbered">
+        {% for c in categories %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">{{c.name}}</div>
+            </div>
+        </li>
+        {% endfor %}
+
+        {% if categories is empty %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">No Categories</div>
+            </div>
+        </li>
+        {% endif %}
+    </ol>
+</div>
+{% endblock %}

@@ -9,16 +9,18 @@ Dashboard
 
 {% block body %}
 <div class="container">
-    <h3>Your Restaurants</h3>
-    Token: {{auth_token}}
-
+    <h3>Your Restaurants
+        <a class="btn btn-primary" href="{% url 'create_restaurant' %}">New</a>
+    </h3>
     <ol class="list-group list-group-numbered">
         {% for r in rest_owned %}
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">{{r.name}}</div>
-                <div class="text-muted">{{r.address1}} | {{r.phone_number}}</div>
+                <div class="fw-bold"><a href="{% url 'read_category' r.id %}">{{r.name}}</a></div>
+                <div class="text-muted">{{r.address1}}</div>
+                <div class="text-muted">{{r.phone_number}}</div>
             </div>
+            <a class="" href="{% url 'edit_restaurant' r.id %}">Edit</a>
         </li>
         {% endfor %}
 
