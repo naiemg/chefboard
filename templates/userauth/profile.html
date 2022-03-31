@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load timetags %}
+{% load moneytags %}
 
 {% block head %}
 {% endblock %}
@@ -18,7 +20,8 @@
             <p class="card-text">
                 {{ product.description }}
             </p>
-            <h6>Renews: {{subscription.current_period_end}}</h6>
+            <h6>Renews: {{subscription.current_period_end|print_timestamp }}</h6>
+            <h6>Amount Charged: ${{subscription.items.data.0.price.unit_amount|print_dollar_amount }}</h6>
         </div>
     </div>
     {% else %}
