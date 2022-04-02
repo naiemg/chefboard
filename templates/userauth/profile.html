@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load timetags %}
 {% load moneytags %}
+{% load static %}
 
 {% block head %}
+<!--Stripe-->
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'main.js' %}"></script>
 {% endblock %}
 
 {% block title %}

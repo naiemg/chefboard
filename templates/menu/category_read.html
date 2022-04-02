@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head %}
 {% endblock %}
@@ -16,5 +17,7 @@
     <div class="text-center p-4 m-4" style="background-color: antiquewhite; border: 3px gray solid;">
         <h1>React Table Goes <br> here with all of the <br> menu_items for that given category</h1>
     </div>
+    <div id="root" />
+    <script src="{% static 'index-bundle.js' %}"></script>
 </div>
 {% endblock %}
