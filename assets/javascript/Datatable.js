@@ -57,7 +57,6 @@ function Datatable() {
   );
 
   const fetchMenuItems = () => {
-    console.log(process.env);
     axios
       .get(`${MENU_ITEM_API_ENDPOINT}?category=${category_id}`, {
         headers: {

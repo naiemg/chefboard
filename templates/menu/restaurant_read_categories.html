@@ -9,6 +9,8 @@ Categories | {{rest_owned.name}}
 
 {% block body %}
 <div class="container">
+    <a class="link-secondary" href="{% url 'dashboard' %}">← Back to all
+        Restaurants</a>
     <h3>Categories
         <a class="btn btn-primary" href="{% url 'category_create' rest_owned.id %}">New</a>
     </h3>

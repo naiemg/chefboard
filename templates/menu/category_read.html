@@ -11,6 +11,8 @@
 {% block body %}
 <div class="container">
     <div hidden id="category_id">{{category.id}}</div>
+    <a class="link-secondary" href="{% url 'restaurant_read_categories' restaurant.id %}">← Back to all
+        Categories</a>
     <h2>{{restaurant.name}} / {{category.name}}</h2>
     <div id="data_table"></div>
     <script src="{% static 'index-bundle.js' %}"></script>
@@ -22,5 +24,15 @@
         <h6>Restaurant: <i>{{restaurant.name}}</i> (id = {{restaurant.id}})</h6>
         <h6>Category: <i>{{category.name}}</i> (id = {{category.id}})</h6>
     </div>
+
+    <!--Developer Note: Delete when deployed!-->
+    <div class="bg-light p-3 mt-3" style="border-left: rgb(208, 92, 15) 3px solid;">
+        <h6>Developer Note: Delete when deployed!</h6>
+        <p>When storing API keys in a .env file and accessing it using <code>process.env.API_KEY</code> in Datatable.js
+            file, you are exposing the API key!</p>
+        <p>Anything in .env will be publicly inspectable in dev tools.</p>
+        <a href="https://create-react-app.dev/docs/adding-custom-environment-variables/">More Info</a>
+    </div>
+
 </div>
 {% endblock %}
