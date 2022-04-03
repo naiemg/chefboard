@@ -1,4 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
+import Datatable from "./javascript/Datatable";
 
-ReactDOM.render(<h1>Hello, react!</h1>, document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("data_table"));
+root.render(
+  <React.StrictMode>
+    <Datatable />
+  </React.StrictMode>
+);

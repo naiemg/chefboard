@@ -12,12 +12,9 @@
 <div class="container">
     <h6>Restaurant: <i>{{restaurant.name}}</i> (id = {{restaurant.id}})</h6>
     <h6>Category: <i>{{category.name}}</i> (id = {{category.id}})</h6>
+    <div hidden id="category_id">{{category.id}}</div>
 
-    <!-- PLACEHOLDER: DELETE THIS WHEN YOU BRING IN THE REACT COMPONENT -->
-    <div class="text-center p-4 m-4" style="background-color: antiquewhite; border: 3px gray solid;">
-        <h1>React Table Goes <br> here with all of the <br> menu_items for that given category</h1>
-    </div>
-    <div id="root" />
+    <div id="data_table"></div>
     <script src="{% static 'index-bundle.js' %}"></script>
 </div>
 {% endblock %}
