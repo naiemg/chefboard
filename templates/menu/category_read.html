@@ -10,11 +10,17 @@
 
 {% block body %}
 <div class="container">
-    <h6>Restaurant: <i>{{restaurant.name}}</i> (id = {{restaurant.id}})</h6>
-    <h6>Category: <i>{{category.name}}</i> (id = {{category.id}})</h6>
     <div hidden id="category_id">{{category.id}}</div>
-
+    <h2>{{restaurant.name}} / {{category.name}}</h2>
     <div id="data_table"></div>
     <script src="{% static 'index-bundle.js' %}"></script>
+
+
+    <!--Developer Note: Delete when deployed!-->
+    <div class="bg-light p-3 mt-3" style="border-left: rgb(1, 93, 1) 3px solid;">
+        <h6>Developer Note: Delete when deployed!</h6>
+        <h6>Restaurant: <i>{{restaurant.name}}</i> (id = {{restaurant.id}})</h6>
+        <h6>Category: <i>{{category.name}}</i> (id = {{category.id}})</h6>
+    </div>
 </div>
 {% endblock %}

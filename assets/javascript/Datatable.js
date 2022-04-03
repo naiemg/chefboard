@@ -96,7 +96,7 @@ function Datatable() {
   }, []);
 
   return (
-    <div style={{ height: "500px", width: "100%" }}>
+    <div style={{ height: "300px", width: "100%" }}>
       <DataGrid
         editMode="row"
         rows={data}
