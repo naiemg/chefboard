@@ -83,7 +83,7 @@ function Datatable() {
               headerName: key,
               width: "200",
               type: typeof menuItems[0][key],
-              editable: true,
+              editable: key === "id" || key == "category" ? false : true,
             };
           })
         : [],
@@ -106,6 +106,7 @@ function Datatable() {
         processRowUpdate={processRowUpdate}
         experimentalFeatures={{ newEditingApi: true }}
       />
+
       {!!snackbar && (
         <Snackbar
           open

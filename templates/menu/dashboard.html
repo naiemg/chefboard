@@ -10,7 +10,7 @@ Dashboard
 {% block body %}
 <div class="container">
     <h3>Your Restaurants
-        <a class="btn btn-primary" href="{% url 'restaurant_create' %}">New</a>
+        <a class="btn btn-primary btn-sm" href="{% url 'restaurant_create' %}">New</a>
     </h3>
     <ol class="list-group list-group-numbered">
         {% for r in rest_owned %}
