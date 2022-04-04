@@ -117,12 +117,19 @@ function MenuItemsApplication() {
         },
       })
       .then((response) => {
-        console.log(response);
+        setSnackbar({
+          children: "Item successfully added",
+          severity: "success",
+        });
+
         form.reset();
         fetchMenuItems();
       })
       .catch((error) => {
-        console.log(error);
+        setSnackbar({
+          children: `Error while saving item! ${error}`,
+          severity: "error",
+        });
       });
   };
 
@@ -181,8 +188,8 @@ function MenuItemsApplication() {
       >
         <TextField id="name" label="Item Name" variant="outlined" />
         <TextField id="price" label="Price" variant="outlined" type="decimal" />
-        <Button color="primary" type="submit">
-          Create Item
+        <Button color="primary" variant="contained" type="submit">
+          Add Item
         </Button>
       </Box>
 
