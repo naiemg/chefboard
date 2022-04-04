@@ -23,7 +23,9 @@ Categories | {{rest_owned.name}}
                 <div class="fw-bold"><a href="{% url 'category_read' rest_owned.id c.id %}">{{c.name}}</a>
                 </div>
             </div>
-            <a class="" href="{% url 'category_update' rest_owned.id c.id %}">Edit</a>
+            <a style="margin-right: 10px;" class="" href="{% url 'category_update' rest_owned.id c.id %}">Edit</a>
+            <a class="link-danger" href="{% url 'category_delete' rest_owned.id c.id %}">Delete</a>
+
         </li>
         {% endfor %}
 

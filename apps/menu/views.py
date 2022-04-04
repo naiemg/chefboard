@@ -159,3 +159,10 @@ def category_update(request, rest_id, cat_id):
     }
 
     return render(request, 'menu/category_update.html', context_dict)
+
+@login_required
+@user_is_owner
+def category_delete(request, rest_id, cat_id, ):
+    category = get_object_or_404(Category, id=cat_id)
+    category.delete()
+    return redirect('/restaurant/'+str(rest_id)+'/category/')

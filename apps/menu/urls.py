@@ -12,4 +12,5 @@ urlpatterns = [
 	path('restaurant/<int:rest_id>/category/create/', views.category_create, name="category_create"),
 	path('restaurant/<int:rest_id>/category/<int:cat_id>/', views.category_read, name="category_read"),
 	path('restaurant/<int:rest_id>/category/<int:cat_id>/update/', views.category_update, name="category_update"),
+	path('restaurant/<int:rest_id>/category/<int:cat_id>/delete/', views.category_delete, name="category_delete"),
 ]
