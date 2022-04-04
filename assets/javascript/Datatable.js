@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { Snackbar } from "@material-ui/core";
+import { Button, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { MENU_ITEM_API_ENDPOINT } from "./config";
 
@@ -95,29 +95,31 @@ function Datatable() {
   }, []);
 
   return (
-    <div style={{ height: "300px", width: "100%" }}>
-      <DataGrid
-        editMode="row"
-        rows={data}
-        columns={columns}
-        pageSize={10}
-        checkboxSelection
-        density="compact"
-        processRowUpdate={processRowUpdate}
-        experimentalFeatures={{ newEditingApi: true }}
-      />
+    <>
+      <div style={{ height: "400px", width: "100%" }}>
+        <DataGrid
+          editMode="row"
+          rows={data}
+          columns={columns}
+          pageSize={10}
+          checkboxSelection
+          density="compact"
+          processRowUpdate={processRowUpdate}
+          experimentalFeatures={{ newEditingApi: true }}
+        />
 
-      {!!snackbar && (
-        <Snackbar
-          open
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          onClose={handleCloseSnackbar}
-          autoHideDuration={6000}
-        >
-          <Alert {...snackbar} onClose={handleCloseSnackbar} />
-        </Snackbar>
-      )}
-    </div>
+        {!!snackbar && (
+          <Snackbar
+            open
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            onClose={handleCloseSnackbar}
+            autoHideDuration={6000}
+          >
+            <Alert {...snackbar} onClose={handleCloseSnackbar} />
+          </Snackbar>
+        )}
+      </div>
+    </>
   );
 }
 
