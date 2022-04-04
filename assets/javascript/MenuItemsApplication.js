@@ -123,6 +123,7 @@ function MenuItemsApplication() {
         });
 
         form.reset();
+        form.elements[0].focus();
         fetchMenuItems();
       })
       .catch((error) => {
@@ -186,7 +187,7 @@ function MenuItemsApplication() {
           justifyContent: "center",
         }}
       >
-        <TextField id="name" label="Item Name" variant="outlined" />
+        <TextField id="name" label="Item Name" variant="outlined" autoFocus />
         <TextField id="price" label="Price" variant="outlined" type="decimal" />
         <Button color="primary" variant="contained" type="submit">
           Add Item
