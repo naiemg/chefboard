@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from apps.userauth.models import UserProfile
 from .models import Category, Restaurant
-from rest_framework.authtoken.models import Token
 from .forms import RestaurantForm, CategoryForm
 from address.models import Address
 from apps.menu.decorators import user_is_owner
@@ -16,9 +15,6 @@ def dashboard(request):
 
     rest_owned = Restaurant.objects.filter(owner=profile)
     context_dict['rest_owned'] = rest_owned
-
-    token_search = Token.objects.get_or_create(user=request.user)
-    context_dict['auth_token'] = token_search[0]
 
     return render(request, 'menu/dashboard.html', context_dict)
 

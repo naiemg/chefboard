@@ -8,9 +8,6 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from django_filters.rest_framework import DjangoFilterBackend
-from django.contrib.auth.decorators import login_required
-
-from apps.userauth.models import UserProfile
 
 class RestaurantAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
     serializer_class = RestaurantSerializer
@@ -61,7 +58,6 @@ class CategoryAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Cre
 
     def delete(self, request, id=None):
         return self.destroy(request, id)
-
 
 class MenuItemAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
     serializer_class = MenuItemSerializer
