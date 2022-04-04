@@ -5,6 +5,8 @@ import axios from "axios";
 import { Button, Snackbar } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import { MENU_ITEM_API_ENDPOINT } from "./config";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
 const useFakeMutation = () => {
   return React.useCallback(
@@ -18,12 +20,13 @@ const useFakeMutation = () => {
   );
 };
 
-function Datatable() {
+function MenuItemsApplication() {
   const category_id = JSON.parse(
     document.getElementById("category_id").textContent
   );
 
   const [menuItems, setMenuItems] = useState([]);
+  const [selectionModel, setSelectionModel] = useState({});
 
   const mutateRow = useFakeMutation();
   const [snackbar, setSnackbar] = React.useState(null);
@@ -56,6 +59,39 @@ function Datatable() {
     [mutateRow]
   );
 
+  const handleDelete = () => {
+    if (selectionModel.length === 0) {
+      setSnackbar({
+        children: "Please select an item to delete",
+        severity: "warning",
+      });
+      return;
+    }
+
+    for (let i = 0; i < selectionModel.length; i++) {
+      axios
+        .delete(`${MENU_ITEM_API_ENDPOINT}/${selectionModel[i]}/`, {
+          headers: {
+            Authorization: `Token ${process.env.API_KEY}`,
+          },
+        })
+        .then(() => {
+          setSnackbar({
+            children: `${selectionModel.length} Items successfully deleted`,
+            severity: "success",
+          });
+        })
+        .catch((error) => {
+          setSnackbar({
+            children: "Error while deleting item",
+            severity: "error",
+          });
+        });
+    }
+    setSelectionModel({});
+    fetchMenuItems();
+  };
+
   const fetchMenuItems = () => {
     axios
       .get(`${MENU_ITEM_API_ENDPOINT}?category=${category_id}`, {
@@ -70,6 +106,38 @@ function Datatable() {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const postMenuItem = (data, form) => {
+    axios
+      .post(`${MENU_ITEM_API_ENDPOINT}/`, data, {
+        headers: {
+          Authorization: `Token ${process.env.API_KEY}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        form.reset();
+        fetchMenuItems();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const data = {
+      item_name: form.name.value,
+      price: form.price.value,
+      category: JSON.parse(document.getElementById("category_id").textContent),
+      is_active: true,
+    };
+
+    postMenuItem(data, form);
   };
 
   const data = useMemo(() => [...menuItems], [menuItems]);
@@ -96,13 +164,38 @@ function Datatable() {
 
   return (
     <>
-      <div style={{ height: "400px", width: "100%" }}>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <TextField id="name" label="Item Name" variant="outlined" />
+        <TextField id="price" label="Price" variant="outlined" type="decimal" />
+        <Button color="primary" type="submit">
+          Create Item
+        </Button>
+      </Box>
+
+      <div style={{ width: "100%" }}>
         <DataGrid
+          autoHeight
           editMode="row"
           rows={data}
           columns={columns}
-          pageSize={10}
           checkboxSelection
+          onSelectionModelChange={(newSelectionModel) => {
+            setSelectionModel(newSelectionModel);
+          }}
+          selectionModel={selectionModel}
           density="compact"
           processRowUpdate={processRowUpdate}
           experimentalFeatures={{ newEditingApi: true }}
@@ -118,9 +211,13 @@ function Datatable() {
             <Alert {...snackbar} onClose={handleCloseSnackbar} />
           </Snackbar>
         )}
+
+        <Button color="secondary" onClick={handleDelete}>
+          Delete Selected Items
+        </Button>
       </div>
     </>
   );
 }
 
-export default Datatable;
+export default MenuItemsApplication;
