@@ -158,7 +158,7 @@ function MenuItemsApplication() {
             return {
               field: key,
               headerName: key,
-              width: "200",
+              width: "250",
               type: typeof menuItems[0][key],
               editable: key === "id" || key == "category" ? false : true,
             };
@@ -208,6 +208,14 @@ function MenuItemsApplication() {
           density="compact"
           processRowUpdate={processRowUpdate}
           experimentalFeatures={{ newEditingApi: true }}
+          initialState={{
+            columns: {
+              columnVisibilityModel: {
+                id: false,
+                category: false,
+              },
+            },
+          }}
         />
 
         {!!snackbar && (
