@@ -6,6 +6,7 @@ from .models import Category, Restaurant
 from .forms import RestaurantForm, CategoryForm
 from address.models import Address
 from apps.menu.decorators import user_is_owner
+from django.db.models import Count
 
 @login_required
 def dashboard(request):

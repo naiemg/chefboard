@@ -21,7 +21,7 @@ class Category(models.Model):
 
 class MenuItem(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE, blank=True, null=True)
-    item_name = models.CharField(max_length=30)
+    item_name = models.CharField(max_length=50)
     price = models.DecimalField(decimal_places = 2, max_digits=5)
     is_active = models.BooleanField(default=True)
 
