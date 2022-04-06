@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useMemo, useState } from "react";
+
 import axios from "axios";
 import { MENU_ITEM_API_ENDPOINT } from "./config";
 
@@ -30,11 +31,52 @@ function MenuItemsApplication() {
   const [selectionModel, setSelectionModel] = useState({});
 
   const mutateRow = useFakeMutation();
-  const [snackbar, setSnackbar] = React.useState(null);
 
+  const [snackbar, setSnackbar] = React.useState(null);
   const handleCloseSnackbar = () => setSnackbar(null);
 
-  const processRowUpdate = React.useCallback(
+  const MenuItem_Create = (data, form) => {
+    axios
+      .post(`${MENU_ITEM_API_ENDPOINT}/`, data, {
+        headers: {
+          Authorization: `Token ${process.env.API_KEY}`,
+        },
+      })
+      .then((response) => {
+        setSnackbar({
+          children: "Item successfully added",
+          severity: "success",
+        });
+
+        form.reset();
+        form.elements[0].focus();
+        MenuItem_Read();
+      })
+      .catch((error) => {
+        setSnackbar({
+          children: `Error while saving item! ${error}`,
+          severity: "error",
+        });
+      });
+  };
+
+  const MenuItem_Read = () => {
+    axios
+      .get(`${MENU_ITEM_API_ENDPOINT}?category=${category_id}`, {
+        headers: {
+          Authorization: `Token ${process.env.API_KEY}`,
+        },
+      })
+      .then((response) => {
+        let fetched_items = response.data;
+        setMenuItems(fetched_items);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const MenuItem_Update = React.useCallback(
     async (newRow) => {
       try {
         // Make the HTTP request to save in the backend
@@ -60,7 +102,7 @@ function MenuItemsApplication() {
     [mutateRow]
   );
 
-  const handleDelete = () => {
+  const MenuItem_Delete = () => {
     if (selectionModel.length === 0) {
       setSnackbar({
         children: "Please select an item to delete",
@@ -90,51 +132,10 @@ function MenuItemsApplication() {
         });
     }
     setSelectionModel({});
-    fetchMenuItems();
+    MenuItem_Read();
   };
 
-  const fetchMenuItems = () => {
-    axios
-      .get(`${MENU_ITEM_API_ENDPOINT}?category=${category_id}`, {
-        headers: {
-          Authorization: `Token ${process.env.API_KEY}`,
-        },
-      })
-      .then((response) => {
-        let fetched_items = response.data;
-        setMenuItems(fetched_items);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const postMenuItem = (data, form) => {
-    axios
-      .post(`${MENU_ITEM_API_ENDPOINT}/`, data, {
-        headers: {
-          Authorization: `Token ${process.env.API_KEY}`,
-        },
-      })
-      .then((response) => {
-        setSnackbar({
-          children: "Item successfully added",
-          severity: "success",
-        });
-
-        form.reset();
-        form.elements[0].focus();
-        fetchMenuItems();
-      })
-      .catch((error) => {
-        setSnackbar({
-          children: `Error while saving item! ${error}`,
-          severity: "error",
-        });
-      });
-  };
-
-  const handleSubmit = (event) => {
+  const handleCreateFormSubmit = (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -146,7 +147,7 @@ function MenuItemsApplication() {
       is_active: true,
     };
 
-    postMenuItem(data, form);
+    MenuItem_Create(data, form);
   };
 
   const data = useMemo(() => [...menuItems], [menuItems]);
@@ -168,7 +169,7 @@ function MenuItemsApplication() {
   );
 
   useEffect(() => {
-    fetchMenuItems();
+    MenuItem_Read();
   }, []);
 
   return (
@@ -180,7 +181,7 @@ function MenuItemsApplication() {
         }}
         noValidate
         autoComplete="off"
-        onSubmit={handleSubmit}
+        onSubmit={handleCreateFormSubmit}
         style={{
           display: "flex",
           alignItems: "center",
@@ -204,9 +205,8 @@ function MenuItemsApplication() {
           onSelectionModelChange={(newSelectionModel) => {
             setSelectionModel(newSelectionModel);
           }}
-          selectionModel={selectionModel}
           density="compact"
-          processRowUpdate={processRowUpdate}
+          processRowUpdate={MenuItem_Update}
           experimentalFeatures={{ newEditingApi: true }}
           initialState={{
             columns: {
@@ -229,7 +229,7 @@ function MenuItemsApplication() {
           </Snackbar>
         )}
 
-        <Button color="secondary" onClick={handleDelete}>
+        <Button color="secondary" onClick={MenuItem_Delete}>
           Delete Selected Items
         </Button>
       </div>
