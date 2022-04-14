@@ -20,6 +20,7 @@ Dashboard
                 <div class="text-muted">{{r.address1}}</div>
                 <div class="text-muted">{{r.phone_number}}</div>
             </div>
+            <a style="margin-right: 10px;" class="text-success" href="{% url 'screen_design' r.id %}">Design Screen</a>
             <a style="margin-right: 10px;" class="" href="{% url 'restaurant_update' r.id %}">Edit</a>
             <a class="link-danger" href="{% url 'restaurant_delete' r.id %}">Delete</a>
         </li>

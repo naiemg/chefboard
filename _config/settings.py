@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'apps.userauth',
     'apps.menu',
     'apps.api',
+    'apps.display',
 
     # third party apps
     "crispy_forms",

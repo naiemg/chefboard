@@ -188,8 +188,20 @@ function MenuItemsApplication() {
           justifyContent: "center",
         }}
       >
-        <TextField id="name" label="Item Name" variant="outlined" autoFocus />
-        <TextField id="price" label="Price" variant="outlined" type="decimal" />
+        <TextField
+          id="name"
+          label="Item Name"
+          variant="outlined"
+          required
+          autoFocus
+        />
+        <TextField
+          id="price"
+          label="Price"
+          variant="outlined"
+          type="decimal"
+          required
+        />
         <Button color="primary" variant="contained" type="submit">
           Add Item
         </Button>
