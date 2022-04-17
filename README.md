@@ -2,6 +2,7 @@
 
 <img src="/static/Chefboard_Logo.png" height="300">
 
-| Completed             | WIP       | Future |
-| --------------------- | --------- | ------ |
-| `User Authentication` | `renders` | ``     |
+| Completed                   | WIP | Future |
+| --------------------------- | --- | ------ |
+| `User Authentication`       | ``  | ``     |
+| `Stripe Recurring Payments` | ``  | ``     |
