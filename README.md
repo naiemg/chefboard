@@ -1,6 +1,6 @@
 # ChefBoard: Digital Display Solutions
 
-![ChefBoard Logo](/static/Chefboard_Logo.png) | width=100
+<img src="/static/Chefboard_Logo.png" height="100">
 
 | Completed | WIP       | Future     |
 | --------- | --------- | ---------- |
