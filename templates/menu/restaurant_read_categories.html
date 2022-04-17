@@ -7,6 +7,10 @@
 Categories | {{rest_owned.name}}
 {% endblock %}
 
+{% block navbar %}
+{% include 'navigation.html' %}
+{% endblock %}
+
 {% block body %}
 <div class="container">
     <a class="link-secondary" href="{% url 'dashboard' %}">← Back to all

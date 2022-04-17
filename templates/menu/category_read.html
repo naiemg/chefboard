@@ -8,6 +8,10 @@
 {{category.name}} | {{restaurant.name}}
 {% endblock %}
 
+{% block navbar %}
+{% include 'navigation.html' %}
+{% endblock %}
+
 {% block body %}
 <div class="container">
     <div hidden id="category_id">{{category.id}}</div>
