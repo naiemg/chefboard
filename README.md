@@ -2,7 +2,6 @@
 
 <img src="/static/Chefboard_Logo.png" height="300">
 
-| Completed | WIP       | Future     |
-| --------- | --------- | ---------- |
-| _Still_   | `renders` | **nicely** |
-| 1         | 2         | 3          |
+| Completed             | WIP       | Future |
+| --------------------- | --------- | ------ |
+| `User Authentication` | `renders` | ``     |
