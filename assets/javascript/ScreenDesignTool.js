@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CATEGORY_ENDPOINT, MENU_ITEM_API_ENDPOINT } from "./config";
 
+import { Grid, Chip } from "@material-ui/core";
+
 function ScreenDesignTool() {
   const restaurant_id = JSON.parse(
     document.getElementById("restaurant_id").textContent
@@ -68,37 +70,68 @@ function ScreenDesignTool() {
     <>
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          flexWrap: "wrap",
-          height: `100vh`,
-          width: `100vw`,
-          backgroundColor: "#f5f5f5",
-          fontSize: ".8em",
-          lineHeight: "2em",
-          padding: "1.5em",
+          backgroundColor: `#4158D0`,
+          backgroundImage: `linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)`,
+          padding: "1rem",
+          margin: "1rem",
+          borderRadius: "1rem",
+          color: "white",
+          width: "100vw",
+          height: "100vh",
         }}
       >
-        {categories &&
-          categories.map((category) => {
-            return (
-              <div key={category.id}>
-                <h4>{category.name}</h4>
-                <div>
-                  {category.menu_items &&
-                    category.menu_items.map((menu_item) => {
-                      return (
-                        <div key={menu_item.id}>
-                          <span>
-                            {menu_item.item_name} ... {menu_item.price}
-                          </span>
-                        </div>
-                      );
-                    })}
-                </div>
-              </div>
-            );
-          })}
+        <Grid container spacing={3}>
+          {categories &&
+            categories.map((category) => {
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={2} key={category.id}>
+                  <div key={category.id}>
+                    <p
+                      style={{
+                        textDecoration: "underline",
+                      }}
+                    >
+                      {category.name}
+                    </p>
+                    <div>
+                      {category.menu_items &&
+                        category.menu_items.map((menu_item) => {
+                          return (
+                            <Grid item lg={12} key={menu_item.id}>
+                              <div key={menu_item.id}>
+                                <Grid
+                                  container
+                                  spacing={1}
+                                  justifyContent={"space-between"}
+                                  style={{
+                                    fontSize: "1.5rem",
+                                  }}
+                                >
+                                  <Grid item key={menu_item.id}>
+                                    {menu_item.item_name}
+                                  </Grid>
+                                  <Grid item key={menu_item.id}>
+                                    <Chip
+                                      variant="outlined"
+                                      label={menu_item.price}
+                                      style={{
+                                        backgroundColor: "#4158D0",
+                                        color: "white",
+                                        border: "1px solid white",
+                                      }}
+                                    />
+                                  </Grid>
+                                </Grid>
+                              </div>
+                            </Grid>
+                          );
+                        })}
+                    </div>
+                  </div>
+                </Grid>
+              );
+            })}
+        </Grid>
       </div>
     </>
   );
