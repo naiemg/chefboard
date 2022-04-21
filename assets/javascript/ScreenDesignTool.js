@@ -2,13 +2,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CATEGORY_ENDPOINT, MENU_ITEM_API_ENDPOINT } from "./config";
 
-import { Grid, Chip } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+import CategoryBlock from "./CategoryBlock";
+
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function ScreenDesignTool() {
   const restaurant_id = JSON.parse(
     document.getElementById("restaurant_id").textContent
   );
   const [categories, setCategories] = useState(null);
+
   const [hasFetchedCategories, setHasFetchedCategories] = useState(false);
 
   const Fetch_Categories = () => {
@@ -66,73 +70,52 @@ function ScreenDesignTool() {
     Fetch_Categories();
   }, []);
 
+  const handleOnDragEnd = (result) => {
+    console.log(result);
+
+    const items = Array.from(categories);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setCategories(items);
+  };
+
   return (
     <>
-      <div
-        style={{
-          backgroundColor: `#4158D0`,
-          backgroundImage: `linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)`,
-          padding: "1rem",
-          margin: "1rem",
-          borderRadius: "1rem",
-          color: "white",
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
-        <Grid container spacing={3}>
-          {categories &&
-            categories.map((category) => {
-              return (
-                <Grid item xs={12} sm={6} md={4} lg={2} key={category.id}>
-                  <div key={category.id}>
-                    <p
-                      style={{
-                        textDecoration: "underline",
-                      }}
-                    >
-                      {category.name}
-                    </p>
-                    <div>
-                      {category.menu_items &&
-                        category.menu_items.map((menu_item) => {
-                          return (
-                            <Grid item lg={12} key={menu_item.id}>
-                              <div key={menu_item.id}>
-                                <Grid
-                                  container
-                                  spacing={1}
-                                  justifyContent={"space-between"}
-                                  style={{
-                                    fontSize: "1.5rem",
-                                  }}
-                                >
-                                  <Grid item key={menu_item.id}>
-                                    {menu_item.item_name}
-                                  </Grid>
-                                  <Grid item key={menu_item.id}>
-                                    <Chip
-                                      variant="outlined"
-                                      label={menu_item.price}
-                                      style={{
-                                        backgroundColor: "#4158D0",
-                                        color: "white",
-                                        border: "1px solid white",
-                                      }}
-                                    />
-                                  </Grid>
-                                </Grid>
-                              </div>
-                            </Grid>
-                          );
-                        })}
-                    </div>
-                  </div>
-                </Grid>
-              );
-            })}
-        </Grid>
-      </div>
+      <Grid container>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="categories">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {categories &&
+                  categories.map((category, index) => {
+                    return (
+                      <Draggable
+                        key={category.id}
+                        draggableId={category.name}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                          >
+                            <CategoryBlock
+                              key={category.name}
+                              category={category}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </Grid>
     </>
   );
 }
