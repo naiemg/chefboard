@@ -5,8 +5,6 @@ import { CATEGORY_ENDPOINT, MENU_ITEM_API_ENDPOINT } from "./config";
 import { Grid } from "@material-ui/core";
 import CategoryBlock from "./CategoryBlock";
 
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
 function ScreenDesignTool() {
   const restaurant_id = JSON.parse(
     document.getElementById("restaurant_id").textContent
@@ -82,39 +80,15 @@ function ScreenDesignTool() {
 
   return (
     <>
-      <Grid container>
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="categories">
-            {(provided) => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                {categories &&
-                  categories.map((category, index) => {
-                    return (
-                      <Draggable
-                        key={category.id}
-                        draggableId={category.name}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <div
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            ref={provided.innerRef}
-                          >
-                            <CategoryBlock
-                              key={category.name}
-                              category={category}
-                            />
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+      <Grid container spacing={3}>
+        {categories &&
+          categories.map((category, index) => {
+            return (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <CategoryBlock category={category} />
+              </Grid>
+            );
+          })}
       </Grid>
     </>
   );
